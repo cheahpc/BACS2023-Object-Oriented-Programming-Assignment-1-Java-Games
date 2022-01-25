@@ -17,7 +17,7 @@ public class Game {
         sc.nextLine();
     }
 
-    public static void wait(int ms) {
+    private void wait(int ms) {
         try {
             Thread.sleep(ms);
         } catch (InterruptedException ex) {
@@ -102,6 +102,60 @@ public class Game {
         } else {
             return 0;
         }
+    }
+
+    private void famPrintResult(char[] cardArr, boolean[] resultArr) {
+        int dummyA = 0;
+        int dummyB = 0;
+        out.print(">>>        Available        |     Current Game\n");
+        for (int x = 0; x < 5; x++) {
+            out.print(">>>   ");
+            for (int i = 0; i < 19; i++) {
+                if (((dummyA + 1) < 10) && ((i == 2) || (i == 7) || (i == 12) || (i == 17))) {
+                    dummyA++;
+                    if (!resultArr[dummyA]) {
+                        out.print(dummyA);
+                    } else {
+                        out.print(" ");
+                    }
+                } else if (((dummyA + 1) >= 10) && ((i == 1) || (i == 6) || (i == 11) || (i == 16))) {
+                    dummyA++;
+                    if (!resultArr[dummyA]) {
+                        i++;
+                        out.print(dummyA);
+                    } else {
+                        out.print(" ");
+                    }
+                } else if ((i == 4) || (i == 9) || (i == 14)) {
+                    out.print("|");
+                } else {
+                    out.print(" ");
+                }
+            }
+            out.print("   |   ");
+            for (int j = 0; j < 15; j++) {
+                if ((j == 1) || (j == 5) || (j == 9) || (j == 13)) {
+                    dummyB++;
+                    if (resultArr[dummyB]) {
+                        out.print(cardArr[dummyB - 1]);
+                    } else {
+                        out.print(" ");
+                    }
+                } else if ((j == 3) || (j == 7) || (j == 11)) {
+                    out.print("|");
+                } else {
+                    out.print(" ");
+                }
+            }
+            if (x < 4) {
+                out.println("\n>>>   ----|----|----|----   |   ---|---|---|---");
+            } else {
+                dummyA = 0;
+                dummyB = 0;
+                out.println(); // Print new line
+            }
+        }
+        return;
     }
 
     public boolean Hangman(int[] userResultVar) {
@@ -352,8 +406,83 @@ public class Game {
     }
 
     public void flipAndMatch() {
+        char[] card = { 'a', 'a', 'b', 'b', 'c', 'c', 'd', 'd', 'e', 'e', 'f', 'f',
+                'g', 'g', 'h', 'h', 'i', 'i', 'j', 'j' };
 
-        return;
+        boolean[] resultArr = new boolean[21];
+
+        Input in = new Input();
+        Display show = new Display();
+
+        String dummyA;
+        int dummyB;
+        int previousCard = 0;
+        gameCounter = 10;
+
+        int index;
+        Random rand = new Random();
+        // Shuffle the card array
+        for (int i = card.length - 1; i > 0; i--) {
+            index = rand.nextInt(i + 1);
+            if (index != i) {
+                card[index] ^= card[i];
+                card[i] ^= card[index];
+                card[index] ^= card[i];
+            }
+        }
+
+        show.flipAndMatch();
+        continuePrompt();
+
+        famPrintResult(card, resultArr);
+        famLoop1: do {
+            out.print("\n>>> Enter an available card number: ");
+            // Check input type range
+            do {
+                dummyA = in.Read();
+                if (!in.validCheck(4, dummyA)) { // Invalid Input
+                    show.errorMessage(4); // Invalid Input Message
+                    continue famLoop1;
+                } else {
+                    out.println("\n"); // Print new line
+                    break;
+                }
+            } while (true);
+
+            // Check input value range
+            dummyB = Integer.parseInt(dummyA);
+            if (!resultArr[dummyB]) {
+                resultArr[dummyB] = true;
+                famPrintResult(card, resultArr);
+            } else {
+                show.errorMessage(41);
+                famPrintResult(card, resultArr);
+                continue famLoop1;
+            }
+
+            // Check if matching pair
+            if (previousCard == 0) { // 1st card
+                previousCard = dummyB;
+            } else if (card[dummyB - 1] != card[previousCard - 1]) { // 2nd card: If not match with previous card
+                resultArr[dummyB] = false;
+                resultArr[previousCard] = false;
+                previousCard = 0;
+                out.println("\n>>>    Opps, you missed! Try again!\n");
+                wait(3000);
+                famPrintResult(card, resultArr);
+            } else { // 2nd card: and match wit the previous card
+
+                previousCard = 0; // Reset previous card and current card
+                gameCounter--; // Reduce matching pair count
+                out.println("\n>>>    It's a match!\n");
+                wait(1000);
+            }
+
+            if (gameCounter == 0) {
+                return;
+            }
+        } while (true);
+
     }
 
     public void fiveDice() {

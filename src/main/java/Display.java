@@ -33,11 +33,14 @@ public class Display {
                 out.println("\n\n!!! ERROR !!! Illegal input detected. Please enter value {1-9} only. !!! ERROR !!!");
                 return;
             case 4: // Flip and Match
+                out.println("\n\n!!! ERROR !!! Invalid input. Please enter value {1-20} only.         !!! ERROR !!!");
+                return;
             case 5: // Five Dice
+                return;
             case 6: // Unexpected Error Occured
                 out.println("\n!!! ERROR !!! Unexpected event occured. Program will go to main menu. !!! ERROR !!!\n");
                 return;
-            case 7:
+            case 7: // Continue Game?
                 out.println("\n!!! ERROR !!! Option not available, please choose again. !!! ERROR !!!");
                 out.print(">  Please enter {Y} or {y} for Yes and {N} or {n}: ");
                 return;
@@ -45,8 +48,10 @@ public class Display {
                 out.println("!!! ERROR !!! You have guessed this letter, please choose letter. !!! ERROR !!!");
                 return;
             case 31:
-                out.println(
-                        "\n\n!!! ERROR !!! Number already taken, please select form the avalable table. !!! ERROR !!!");
+                out.println("\n\n!!! ERROR !!! Number already taken, please select form the avalable table. !!! ERROR !!!");
+                return;
+            case 41:
+                out.println("\n\n!!! ERROR !!! Number already taken, please select form the avalable table. !!! ERROR !!!");
                 return;
             default:
                 return;
@@ -134,7 +139,9 @@ public class Display {
             }
             out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         } else if (gameType == 'd') { // Flip and Match
-
+            out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+            out.println("+++   Awesome! You have completed the puzzle!             +++\n");
+            out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         } else if (gameType == 'e') { // Five Dice
 
         } else {
@@ -192,4 +199,26 @@ public class Display {
         return;
     }
 
+    public void flipAndMatch() {
+        out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        out.println("+++         Welcome to the Flip and Match Game!          ++++");
+        out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
+        out.println("+++   1. Select a pair of available number                +++");
+        out.println("+++   2. Find all matching pair to complete the game      +++");
+        out.println("+++                                                       +++");
+        out.println("+++                   Numbering Diagram                   +++");
+        out.println("+++                    1 |  2 |  3 |  4                   +++");
+        out.println("+++                  ----|----|----|----                  +++");
+        out.println("+++                    5 |  6 |  7 |  8                   +++");
+        out.println("+++                  ----|----|----|----                  +++");
+        out.println("+++                    9 | 10 | 11 | 12                   +++");
+        out.println("+++                  ----|----|----|----                  +++");
+        out.println("+++                   13 | 14 | 15 | 16                   +++");
+        out.println("+++                  ----|----|----|----                  +++");
+        out.println("+++                   17 | 18 | 19 | 20                   +++");
+        out.println("+++                                                       +++");
+        out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        return;
+    }
 }

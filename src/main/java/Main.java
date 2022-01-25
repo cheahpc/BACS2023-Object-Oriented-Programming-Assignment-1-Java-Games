@@ -46,11 +46,9 @@ public class Main {
                     case 'e':
                         run.fiveDice();
                         break;
-
                     default:
                         show.errorMessage(6);
                         continue menu;
-
                 }
 
                 // Game.gameCounter = 0;
