@@ -30,6 +30,8 @@ public class Display {
                 out.println("!!! ERROR !!! Option not available, please enter {0}, {1}, or {2} only. !!! ERROR !!!");
                 return;
             case 3: // Tic-Tac-Toe
+                out.println("\n\n!!! ERROR !!! Illegal input detected. Please enter value {1-9} only. !!! ERROR !!!");
+                return;
             case 4: // Flip and Match
             case 5: // Five Dice
             case 6: // Unexpected Error Occured
@@ -42,7 +44,10 @@ public class Display {
             case 11:
                 out.println("!!! ERROR !!! You have guessed this letter, please choose letter. !!! ERROR !!!");
                 return;
-
+            case 31:
+                out.println(
+                        "\n\n!!! ERROR !!! Number already taken, please select form the avalable table. !!! ERROR !!!");
+                return;
             default:
                 return;
         }
@@ -54,14 +59,14 @@ public class Display {
             out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
             if (userWin) {
                 if (userResult[0] == 0) {
-                    out.println("\n+++   Awesome! You didn't even miss a letter!             +++\n");
+                    out.println("+++   Awesome! You didn't even miss a letter!             +++\n");
                 } else if (userResult[0] == 1) {
-                    out.println("\n+++   Great Job! You missed just once!                    +++\n");
+                    out.println("+++   Great Job! You missed just once!                    +++\n");
                 } else {
-                    out.println("\n+++   Well Done! Too bad you missed " + userResult[0] + " times.         <<<\n");
+                    out.println("+++   Well Done! Too bad you missed " + userResult[0] + " times.              +++\n");
                 }
             } else {
-                out.println("\n+++   Opps, better luck next time!                        +++\n");
+                out.println("+++   Opps, better luck next time!                        +++\n");
             }
             out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         } else if (gameType == 'b') { // Scissor Rock Paper
@@ -119,7 +124,15 @@ public class Display {
             }
             out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         } else if (gameType == 'c') { // Tic-Tac-Toe
-
+            out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+            if (userResult[0] == 0) {
+                out.println("+++   What a great match! It is a tie!                    +++\n");
+            } else if (userResult[0] == 1) {
+                out.println("+++   Too bad, the Computer Wins!                         +++\n");
+            } else if (userResult[0] == 2) {
+                out.println("+++   Congratulations! You are smarter than the computer! +++\n");
+            }
+            out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         } else if (gameType == 'd') { // Flip and Match
 
         } else if (gameType == 'e') { // Five Dice
@@ -146,7 +159,7 @@ public class Display {
         return;
     }
 
-    public void ScissorRockPaper() {
+    public void scissorRockPaper() {
         out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         out.println("+++       Welcome to the Scissor Paper Rock Game!        ++++");
         out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
@@ -158,4 +171,25 @@ public class Display {
         out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         return;
     }
+
+    public void ticTacToe() {
+        out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        out.println("+++           Welcome to the Tic-Tac-Toe Game!           ++++");
+        out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
+        out.println("+++   1. Select a number (1-9) to place your symbol       +++");
+        out.println("+++   2. Form a straight line with 3 matching symbol      +++");
+        out.println("+++   3. Horizontal, Vertical, and diagonal line accepted +++");
+        out.println("+++                                                       +++");
+        out.println("+++                   Numbering Diagram                   +++");
+        out.println("+++                      1 | 2 | 3                        +++");
+        out.println("+++                     ---|---|---                       +++");
+        out.println("+++                      4 | 5 | 6                        +++");
+        out.println("+++                     ---|---|---                       +++");
+        out.println("+++                      8 | 7 | 9                        +++");
+        out.println("+++                                                       +++");
+        out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        return;
+    }
+
 }

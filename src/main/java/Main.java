@@ -1,5 +1,7 @@
 import static java.lang.System.out;
 
+import java.time.Year;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -13,11 +15,6 @@ public class Main {
         String gameOption;
         boolean userWin = false;
         int[] Result = new int[33]; // Initialize Space to store game result
-
-        // int[] Result = { 0, 2, 1, 2, 1, 2, 2, 1, 0, 2,
-        // 1, 2, 1, 0, 2, 1, 0, 2, 1, 2,
-        // 2, 1, 0, 0, 0, 2, 1, 2, 1, 2,
-        // 1, 2, 3 };
 
         show.mainMenu();
         menu: while (true) {
@@ -33,22 +30,21 @@ public class Main {
             // Run the game in loop
             while (true) {
                 // out.println("The gameOption is :" + gameOption.charAt(0) + ":"); // Debug
-
                 switch (gameOption.charAt(0)) {
                     case 'a':
                         userWin = run.Hangman(Result);
                         break;
                     case 'b':
-                        run.ScissorRockPaper(Result);
+                        run.scissorRockPaper(Result);
                         break;
                     case 'c':
-                        run.TicTacToe();
+                        Result[0] = run.ticTacToe();
                         break;
                     case 'd':
-                        run.FlipAndMatch();
+                        run.flipAndMatch();
                         break;
                     case 'e':
-                        run.FiveDice();
+                        // run.fiveDice();
                         break;
 
                     default:
