@@ -23,9 +23,8 @@ public class Display {
                 out.println("\n!!! ERROR !!! Option not available, please choose again. !!! ERROR !!!");
                 out.print(">  Please enter the alphabet of your desired game: ");
                 return;
-            case 1:
-                out.println("\n!!! ERROR !!! Option not available, please choose again. !!! ERROR !!!");
-                out.print(">  Please enter {Y} or {y} for Yes and {N} or {n}: ");
+            case 1: // Hangman
+                out.println("!!! ERROR !!! Illegal character, please enter a letter from {a-z} only. !!! ERROR !!!");
                 return;
             case 2: // Scissor Rock Paper
                 out.println("!!! ERROR !!! Option not available, please enter {0}, {1}, or {2} only. !!! ERROR !!!");
@@ -36,6 +35,14 @@ public class Display {
             case 6: // Unexpected Error Occured
                 out.println("\n!!! ERROR !!! Unexpected event occured. Program will go to main menu. !!! ERROR !!!\n");
                 return;
+            case 7:
+                out.println("\n!!! ERROR !!! Option not available, please choose again. !!! ERROR !!!");
+                out.print(">  Please enter {Y} or {y} for Yes and {N} or {n}: ");
+                return;
+            case 11:
+                out.println("!!! ERROR !!! You have guessed this letter, please choose letter. !!! ERROR !!!");
+                return;
+
             default:
                 return;
         }
@@ -44,11 +51,19 @@ public class Display {
     public void gameOver(char gameType, boolean userWin, int userResult[]) {
 
         if (gameType == 'a') { // Hangman
+            out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
             if (userWin) {
-                out.println("\n^^^   Kudos! You did it! You have missed: " + userResult[0] + "   <<<\n");
+                if (userResult[0] == 0) {
+                    out.println("\n+++   Awesome! You didn't even miss a letter!             +++\n");
+                } else if (userResult[0] == 1) {
+                    out.println("\n+++   Great Job! You missed just once!                    +++\n");
+                } else {
+                    out.println("\n+++   Well Done! Too bad you missed " + userResult[0] + " times.         <<<\n");
+                }
             } else {
-                out.println("\n(((   Opps, better luck next time.   )))\n");
+                out.println("\n+++   Opps, better luck next time!                        +++\n");
             }
+            out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         } else if (gameType == 'b') { // Scissor Rock Paper
 
             out.println("\n+++++++++++++++++++++      Result      ++++++++++++++++++++++");
@@ -119,15 +134,23 @@ public class Display {
     }
 
     public void Hangman() {
-
+        out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        out.println("+++             Welcome to the Hangman Game!             ++++");
+        out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
+        out.println("+++   1. You are given a random word wintin 10 letters    +++");
+        out.println("+++   2. You have 10 chances to guess all the letters     +++");
+        out.println("+++   3. Only one letter is allowed for each guess        +++");
+        out.println("+++   4. All letters are in small capital                 +++");
+        out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         return;
     }
 
     public void ScissorRockPaper() {
-        out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         out.println("+++       Welcome to the Scissor Paper Rock Game!        ++++");
         out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-        out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++\n");
+        out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
         out.println("++++++++++   Digit   +++++++++++++++   Represents   +++++++++");
         out.println("+++            0            |          Scissor            +++");
         out.println("+++            1            |          Rock               +++");

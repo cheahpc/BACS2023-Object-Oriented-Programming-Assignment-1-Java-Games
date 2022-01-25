@@ -18,16 +18,16 @@ public class Input {
                 p = Pattern.compile("[abcdeABCDE]{1}");
                 break;
             case 1: // Hangman
-                p = Pattern.compile("[#a-z]");
+                p = Pattern.compile("[a-z]");
                 break;
             case 2: // Scissor Rock Paper
-                p = Pattern.compile("[#0-2]{1}");
+                p = Pattern.compile("[0-2]{1}");
                 break;
             case 3: // Tic-Tac-Toe
-                p = Pattern.compile("[#1-9]{1}");
+                p = Pattern.compile("[1-9]{1}");
                 break;
             case 4: // Flip and Match
-                p = Pattern.compile("[#0-9]{1,2}");
+                p = Pattern.compile("[0-9]{1,2}");
                 break;
             // case 5: // Five Dice
             case 6: // Game Continue Option

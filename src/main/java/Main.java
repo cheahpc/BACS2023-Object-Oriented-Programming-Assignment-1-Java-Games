@@ -36,8 +36,7 @@ public class Main {
 
                 switch (gameOption.charAt(0)) {
                     case 'a':
-                        out.println("The gameOption is :" + gameOption.charAt(0) + ":"); // Debug
-                        run.Hangman();
+                        userWin = run.Hangman(Result);
                         break;
                     case 'b':
                         run.ScissorRockPaper(Result);
@@ -67,7 +66,7 @@ public class Main {
                     gameEnd: while (true) {
                         userInput = in.Read();
                         if (!in.validCheck(6, userInput)) { // Invalid Input
-                            show.errorMessage(1); // Invalid Input Message
+                            show.errorMessage(7); // Invalid Input Message
                             continue gameEnd;
                         } else {
                             if (userInput.toLowerCase().charAt(0) == 'n') {

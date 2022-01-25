@@ -17,9 +17,90 @@ public class Game {
         sc.nextLine();
     }
 
-    public void Hangman() {
+    public boolean Hangman(int[] userResultVar) {
+        final String[] words = { "secretary", "determine", "baby", "cow", "robot", "tank", "begin", "root", "ride",
+                "meaning", "ignorant", "retire", "link", "grimace", "summer", "listen" };
 
-        return;
+        String word = words[(int) (Math.random() * words.length)];
+        String dummy;
+        Input in = new Input();
+        Display show = new Display();
+        int wordLengh = word.length();
+        boolean[] correctGuessArr = new boolean[10];
+        boolean correctGuess = false;
+
+        gameCounter = 10;
+        userResultVar[0] = 0;
+
+        show.Hangman();
+        continuePrompt();
+
+        hmLoop1: for (int i = 0; i < correctGuessArr.length; i++) {
+            out.print("Guess this word: ");
+            // out.print(word + " "); // Debug
+            for (int j = 0; j < wordLengh; j++) {
+                if (correctGuessArr[j]) {
+                    out.print(word.charAt(j));
+                } else {
+                    out.print("*");
+                }
+            }
+            out.println(); // New line
+
+            if (i == 9) {
+                out.print(">>>   Guess ");
+            } else {
+                out.print(">>>   Guess  ");
+            }
+            out.print((i + 1) + ": ");
+
+            // Check input range
+            do {
+                dummy = in.Read();
+                if (!in.validCheck(1, dummy)) { // Invalid Input
+                    show.errorMessage(1); // Invalid Input Message
+                    i--;
+                    continue hmLoop1;
+                } else {
+                    break;
+                }
+            } while (true);
+
+            // Check input value for repeating letter
+            for (int x = 0; x < wordLengh; x++) {
+                if (correctGuessArr[x]) {
+                    if (dummy.charAt(0) == word.charAt(x)) {
+                        show.errorMessage(11);
+                        i--;
+                        continue hmLoop1;
+                    }
+                }
+            }
+            // Check input value for matching letter
+            for (int y = 0; y < wordLengh; y++) {
+                if (dummy.charAt(0) == word.charAt(y)) {
+                    correctGuessArr[y] = true;
+                    correctGuess = true;
+                }
+            }
+
+            // Check completeness
+            for (int j = 0; j < wordLengh; j++) {
+                if (!correctGuessArr[j]) { // If any false for the whole word
+                    break;
+                } else if ((j == wordLengh - 1) && (correctGuessArr[j])) {
+                    gameCounter = 0;
+                    return true;
+                }
+            }
+
+            if (correctGuess) {
+                correctGuess = false; // Correct guess reset status
+            } else {
+                userResultVar[0]++; // Wrong guess increase counter
+            }
+        }
+        return false;
     }
 
     public void ScissorRockPaper(int[] userResultVar) {
@@ -63,7 +144,7 @@ public class Game {
 
             // Debug
             // for (int x = 0; i < 9; i++) {
-            // out.println("Comuter: " + userResultVar[x] + " Player: " + userResultVar[x +
+            // out.println("Computer: " + userResultVar[x] + " Player: " + userResultVar[x +
             // 10]);
             // }
 
