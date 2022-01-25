@@ -44,7 +44,7 @@ public class Main {
                         run.flipAndMatch();
                         break;
                     case 'e':
-                        // run.fiveDice();
+                        run.fiveDice();
                         break;
 
                     default:

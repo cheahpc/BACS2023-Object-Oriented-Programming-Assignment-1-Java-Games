@@ -17,6 +17,14 @@ public class Game {
         sc.nextLine();
     }
 
+    public static void wait(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     private void tttPrintResult(int[] resultArr) {
         int dummyA = 0;
         int dummyB = 0;
@@ -316,7 +324,7 @@ public class Game {
                 return 0;
             }
             // #endregion Player
-
+            wait(2000);
             // #region Computer
             int temp = 0;
             do {
@@ -348,7 +356,7 @@ public class Game {
         return;
     }
 
-    public void FiveDice() {
+    public void fiveDice() {
 
         return;
     }
