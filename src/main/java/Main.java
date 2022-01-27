@@ -13,7 +13,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        
         String userInput; // To store user's input
         String gameOption; // To store game option
 
@@ -25,7 +24,6 @@ public class Main {
         Display.mainMenu(); // Print main menu interface
 
         menu: while (true) {
-
             // Ask for game option
             gameOption = Input.read();
             if (!Input.validCheck(0, gameOption)) { // Invalid Input
@@ -34,19 +32,19 @@ public class Main {
             }
 
             gameOption = gameOption.toLowerCase(); // Convert to lower case
+            if (DEBUG_MAIN) {
+                out.println("The userInput is :" + userInput.charAt(0) + ":"); // Debug
+            }
 
+            // Run the game
             game: while (true) {
-
-                if (DEBUG_MAIN) {
-                    out.println("The userInput is :" + userInput.charAt(0) + ":"); // Debug
-                }
 
                 switch (gameOption.charAt(0)) {
                     case 'a':
-                        userWin = run.hangman(Result); // Execute hangman
+                        userWin = run.hangman(Result);
                         break;
                     case 'b':
-                        run.scissorRockPaper(Result); // Execute
+                        run.scissorRockPaper(Result);
                         break;
                     case 'c':
                         Result[0] = run.ticTacToe();
@@ -62,20 +60,20 @@ public class Main {
                         continue menu;
                 }
 
-                // Ask if the user want to continue the game or try other game
+                // Print the game result
+                // Print the game over prompt
                 Display.gameOver(gameOption.charAt(0), userWin, Result);
-
                 gameEnd: while (true) {
                     userInput = Input.read();
                     if (!Input.validCheck(6, userInput)) { // Invalid Input
                         Display.errorMessage(7); // Invalid Input Message
-                        continue gameEnd;
+                        continue gameEnd; // Loop back to prompt user input
                     } else {
-                        if (userInput.toLowerCase().charAt(0) == 'n') {
-                            Display.mainMenu();
-                            continue menu;
-                        } else {
-                            continue game;
+                        if (userInput.toLowerCase().charAt(0) == 'n') { // If the user choose no
+                            Display.mainMenu(); // Display the main menu UI
+                            continue menu; // Loop back to prompt user input
+                        } else { // If user choose yes
+                            continue game; // Loop back to game
                         }
                     }
 
