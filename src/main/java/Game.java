@@ -1,37 +1,34 @@
 import java.util.Random;
-import java.util.Scanner;
 
 import static java.lang.System.out;
 
 public class Game {
-    public static int gameCounter;
 
     private void continuePrompt() {
-        System.out.println("Press {Enter} key to start the game!");
+        System.out.println("Press {Enter} key to start the game!"); // Print prompt message
         try {
-            System.in.read();
+            Main.sc.nextLine(); // Read input
         } catch (Exception e) {
-
+            System.out.println("Error! Unable to process input."); // Unexpected exception message
         }
-        Scanner sc = new Scanner(System.in);
-        sc.nextLine();
     }
 
     private void wait(int ms) {
         try {
-            Thread.sleep(ms);
+            Thread.sleep(ms); // Try to sleep for ms milliseconds
         } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
+            Thread.currentThread().interrupt();// Unexpected error occur
         }
     }
 
     private void tttPrintResult(int[] resultArr) {
-        int dummyA = 0;
-        int dummyB = 0;
+        int dummyA = 0; // Counter for Available numbers
+        int dummyB = 0; // Counter for Current Game
+
         out.print(">>>    Available    |   Current Game\n");
-        for (int x = 0; x < 3; x++) {
+        for (int x = 0; x < 3; x++) { // For 3 lines
             out.print(">>>   ");
-            for (int i = 0; i < 11; i++) {
+            for (int i = 0; i < 11; i++) { // Print the Available number
                 if ((i == 1) || (i == 5) || (i == 9)) {
                     dummyA++;
                     if (resultArr[dummyA] == 0) {
@@ -45,16 +42,16 @@ public class Game {
                     out.print(" ");
                 }
             }
-            out.print("   |   ");
-            for (int j = 0; j < 11; j++) {
+            out.print("   |   "); // Print seperating line for Available number and Current Game
+            for (int j = 0; j < 11; j++) { // Print the Current Game
                 if ((j == 1) || (j == 5) || (j == 9)) {
                     dummyB++;
-                    if (resultArr[dummyB] == 1) { // Computer
-                        out.print("O");
-                    } else if (resultArr[dummyB] == 2) { // Player
-                        out.print("X");
-                    } else {
-                        out.print(" ");
+                    if (resultArr[dummyB] == 1) { // If computer taken this number
+                        out.print("O"); // Print the O symbol for computer
+                    } else if (resultArr[dummyB] == 2) { // If Player taken this number
+                        out.print("X"); // Print the X symbol for player
+                    } else { // If this number is not taken
+                        out.print(" "); // Print a space
                     }
                 } else if ((j == 3) || (j == 7)) {
                     out.print("|");
@@ -62,19 +59,14 @@ public class Game {
                     out.print(" ");
                 }
             }
-            if (x < 2) {
-                out.println("\n>>>   ---|---|---   |   ---|---|---");
-            } else {
-                dummyA = 0;
-                dummyB = 0;
-                out.println(); // Print new line
-            }
+            // Print seperating line for each row
+            out.println((x < 2) ? "\n>>>   ---|---|---   |   ---|---|---" : "\n");
         }
         return;
     }
 
     private int tttCheckAlgorithm(int[] resultArr) {
-        // Check winner
+        // Check winner for each possible winning condition
         if ((resultArr[1] != 0) && (resultArr[1] == resultArr[2]) // R1
                 && (resultArr[1] == resultArr[3])) {
             return resultArr[1];
@@ -104,195 +96,181 @@ public class Game {
         }
     }
 
-    private void famPrintResult(char[] cardArr, boolean[] resultArr) {
-        int dummyA = 0;
-        int dummyB = 0;
+    private static void famPrintResult(char[] cardArr, boolean[] resultArr) {
+        int dummyA = 0; // Counter for Available numbers
+        int dummyB = 0; // Counter for Current Game
+
         out.print(">>>        Available        |     Current Game\n");
-        for (int x = 0; x < 5; x++) {
+        for (int x = 0; x < 5; x++) { // Print 5 rows of the game interface
             out.print(">>>   ");
-            for (int i = 0; i < 19; i++) {
-                if (((dummyA + 1) < 10) && ((i == 2) || (i == 7) || (i == 12) || (i == 17))) {
+            for (int i = 0; i < 19; i++) { // Print the available option
+                if (((dummyA + 1) < 10) && ((i == 2) || (i == 7) || (i == 12) || (i == 17))) { // If the number is below
+                                                                                               // 10
                     dummyA++;
-                    if (!resultArr[dummyA]) {
-                        out.print(dummyA);
-                    } else {
-                        out.print(" ");
+                    if (!resultArr[dummyA]) { // If number not taken
+                        out.print(dummyA); // Print the number
+                    } else { // If number is taken
+                        out.print(" "); // Print a space
                     }
-                } else if (((dummyA + 1) >= 10) && ((i == 1) || (i == 6) || (i == 11) || (i == 16))) {
+                } else if (((dummyA + 1) >= 10) && ((i == 1) || (i == 6) || (i == 11) || (i == 16))) { // If the number
+                                                                                                       // is above 10
                     dummyA++;
-                    if (!resultArr[dummyA]) {
-                        i++;
-                        out.print(dummyA);
-                    } else {
-                        out.print(" ");
+                    if (!resultArr[dummyA]) { // If nuber is not taken
+                        i++; // Increase the counter as the number is printed is printed
+                        out.print(dummyA); // Print the number
+                    } else { // If number is taken
+                        out.print(" "); // Print a space
                     }
-                } else if ((i == 4) || (i == 9) || (i == 14)) {
+                } else if ((i == 4) || (i == 9) || (i == 14)) { // Print the seperating line
                     out.print("|");
-                } else {
+                } else { // Print empty space in between the number and the seperating line
                     out.print(" ");
                 }
             }
-            out.print("   |   ");
-            for (int j = 0; j < 15; j++) {
-                if ((j == 1) || (j == 5) || (j == 9) || (j == 13)) {
+            out.print("   |   "); // Print a line seperating the Available number and the Current game section
+            for (int i = 0; i < 15; i++) { // Print the actual game
+                if ((i == 1) || (i == 5) || (i == 9) || (i == 13)) {
                     dummyB++;
-                    if (resultArr[dummyB]) {
-                        out.print(cardArr[dummyB - 1]);
-                    } else {
-                        out.print(" ");
+                    if (resultArr[dummyB]) { // If the card is taken
+                        out.print(cardArr[dummyB - 1]); // Print the card character
+                    } else { // If the card is not taken
+                        out.print(" "); // Print a space
                     }
-                } else if ((j == 3) || (j == 7) || (j == 11)) {
+                } else if ((i == 3) || (i == 7) || (i == 11)) { // Print the seperating line
                     out.print("|");
-                } else {
+                } else { // Print empty space in between the number and the seperating line
                     out.print(" ");
                 }
             }
-            if (x < 4) {
+            if (x < 4) { // Print the seperating row for lines below 4
                 out.println("\n>>>   ----|----|----|----   |   ---|---|---|---");
             } else {
-                dummyA = 0;
-                dummyB = 0;
+                dummyA = 0; // Reset the counter
+                dummyB = 0; // Reset the counter
                 out.println(); // Print new line
             }
         }
         return;
     }
 
-    public boolean Hangman(int[] userResultVar) {
+    public boolean hangman(int[] userResultVar) {
+        // Predefined words with 10 letters
         final String[] words = { "secretary", "determine", "baby", "cow", "robot", "tank", "begin", "root", "ride",
                 "meaning", "ignorant", "retire", "link", "grimace", "summer", "listen" };
 
-        String word = words[(int) (Math.random() * words.length)];
-        String dummy;
-        Input in = new Input();
-        Display show = new Display();
-        int wordLengh = word.length();
-        boolean[] correctGuessArr = new boolean[10];
-        boolean correctGuess = false;
+        String word = words[(int) (Math.random() * words.length)]; // Set a random word from the list of words
+        String dummy; // Temporary store the user's guess
+        int wordLengh = word.length(); // Prepare a variagle storing the random word's length
+        boolean[] correctGuessArr = new boolean[10]; // Array to keep track of the correct guess
+        boolean correctGuess = false; // Boolean to check if the user guessed correctly
+        userResultVar[0] = 0; // Reset the array
 
-        gameCounter = 10;
-        userResultVar[0] = 0;
-
-        show.Hangman();
+        Display.hangman(); // Print hangman UI and rules
         continuePrompt();
-
         hmLoop1: for (int i = 0; i < correctGuessArr.length; i++) {
+            // #region Print prompt
             out.print("Guess this word: ");
-            // out.print(word + " "); // Debug
-            for (int j = 0; j < wordLengh; j++) {
-                if (correctGuessArr[j]) {
-                    out.print(word.charAt(j));
-                } else {
-                    out.print("*");
+            if (Main.DEBUG_HANGMAN) {
+                out.print(word + " "); // Debug
+            }
+            for (int j = 0; j < wordLengh; j++) { // Print the random word
+                if (correctGuessArr[j]) { // If the letter is guessed corretly
+                    out.print(word.charAt(j)); // Show the letter of the word
+                } else { // IF the letter is not guessed
+                    out.print("*"); // Show the * sign
                 }
             }
-            out.println(); // New line
-
-            if (i == 9) {
-                out.print(">>>   Guess ");
-            } else {
-                out.print(">>>   Guess  ");
-            }
-            out.print((i + 1) + ": ");
+            out.print((i == 9) ? "\n>>>   Guess : " : "\n>>>   Guess  : ");
+            // #endregion Print prompt
 
             // Check input range
             do {
-                dummy = in.Read();
-                if (!in.validCheck(1, dummy)) { // Invalid Input
-                    show.errorMessage(1); // Invalid Input Message
-                    i--;
-                    continue hmLoop1;
-                } else {
-                    break;
+                dummy = Input.read();
+                if (!Input.validCheck(1, dummy)) { // If the input is not in range of regEx
+                    Display.errorMessage(1); // Display invalid input message
+                    i--; // Decrease the chance count
+                    continue hmLoop1; // Loop back to ask for another input
+                } else { // If input is in range of regEx
+                    break; // Break the loop for asking user input
                 }
             } while (true);
 
             // Check input value for repeating letter
-            for (int x = 0; x < wordLengh; x++) {
-                if (correctGuessArr[x]) {
-                    if (dummy.charAt(0) == word.charAt(x)) {
-                        show.errorMessage(11);
-                        i--;
-                        continue hmLoop1;
+            for (int x = 0; x < wordLengh; x++) { // For each letter
+                if (correctGuessArr[x]) { // If the letter is guessed
+                    if (dummy.charAt(0) == word.charAt(x)) { // If the current guess matches with the guessed letter
+                        Display.errorMessage(11); // Display the letter guessed message
+                        i--; // Decrease the chance count
+                        continue hmLoop1; // Loop back to ask for guess
                     }
                 }
             }
+
             // Check input value for matching letter
-            for (int y = 0; y < wordLengh; y++) {
-                if (dummy.charAt(0) == word.charAt(y)) {
-                    correctGuessArr[y] = true;
-                    correctGuess = true;
+            for (int y = 0; y < wordLengh; y++) { // For each letter
+                if (dummy.charAt(0) == word.charAt(y)) { // If the user input matches with one of the random word letter
+                    correctGuessArr[y] = true; // Set the correct guess array to true for the letter
+                    correctGuess = true; // Set the correct guess status to true
                 }
             }
 
             // Check completeness
             for (int j = 0; j < wordLengh; j++) {
-                if (!correctGuessArr[j]) { // If any false for the whole word
-                    break;
-                } else if ((j == wordLengh - 1) && (correctGuessArr[j])) {
-                    gameCounter = 0;
-                    return true;
+                if (!correctGuessArr[j]) { // If any false in the array detected
+                    break; // Continue the game
+                } else if ((j == wordLengh - 1) && (correctGuessArr[j])) { // Else if the last guess is true
+                    return true; // End the exit the method with true
                 }
             }
-
-            if (correctGuess) {
+            if (correctGuess) { // Check if user input is a coorect guess
                 correctGuess = false; // Correct guess reset status
             } else {
                 userResultVar[0]++; // Wrong guess increase counter
             }
         }
-        gameCounter = 0;
-        return false;
+        return false; // Any other case, exit the method with false
     }
 
     public void scissorRockPaper(int[] userResultVar) {
         // Reset Variables
-        gameCounter = 10;
         userResultVar[30] = 0; // Computer Win Counter
         userResultVar[31] = 0; // Player Win Counter
         userResultVar[32] = 0; // Tie Counter
-        Input in = new Input();
-        Display show = new Display();
 
-        String temp = ""; // For temporary read user input and checking
-        int temp2; // For storing user input
+        String temp; // For temporary read user input and checking
 
-        show.scissorRockPaper(); // Print the header
+        Display.scissorRockPaper(); // Show the game UI and Rules
         continuePrompt(); // Prompt the user to start the game
 
         // Loop the game for 10 rounds
         srpLoop1: for (int i = 0; i < 10; i++) {
             // Computer
             Random rand = new Random(); // instance of random class
-            userResultVar[i] = rand.nextInt(3); // Generate random between 0 and 2
+            userResultVar[i] = rand.nextInt(3); // Store random computer choice
 
-            // User
-            if (i == 9) {
-                out.print(">>>   Round " + (i + 1) + ": ");
-            } else {
-                out.print(">>>   Round  " + (i + 1) + ": ");
-            }
-
+            // Print player prompt
+            out.print((i == 9) ? ">>>   Round " + (i + 1) + ": " : ">>>   Round  " + (i + 1) + ": ");
+            // Check player's input
             do {
-                temp = in.Read();
-                if (!in.validCheck(2, temp)) { // Invalid Input
-                    show.errorMessage(2); // Invalid Input Message
-                    i--;
-                    continue srpLoop1;
-                } else {
-                    break;
+                temp = Input.read();
+                if (!Input.validCheck(2, temp)) { // If input is not in range of regEx
+                    Display.errorMessage(2); // Invalid Input Message
+                    i--; // Decrease chance counter
+                    continue srpLoop1; // Loop back to ask for another input
+                } else { // If input is in range of regEx
+                    break; // Break the loop
                 }
             } while (true);
 
-            // Debug
-            // for (int x = 0; i < 9; i++) {
-            // out.println("Computer: " + userResultVar[x] + " Player: " + userResultVar[x +
-            // 10]);
-            // }
+            if (Main.DEBUG_SCISSOR_ROCK_PAPER) {
+                for (int x = 0; i < 9; i++) { // Debug show player and computer's option
+                    out.println("Computer: " + userResultVar[x] + " Player: " + userResultVar[x + 10]);
+                }
+            }
 
-            temp2 = Integer.parseInt(temp);
-            userResultVar[i + 10] = temp2; // Store the value to array
+            userResultVar[i + 10] = Integer.parseInt(temp); // Store the player choice to array
 
+            // Check for each possible outcome and set the winner
             if (userResultVar[i] == 0) {
                 if (userResultVar[i + 10] == 0) {
                     userResultVar[i + 20] = 2; // 00
@@ -319,37 +297,30 @@ public class Game {
                 }
             }
             userResultVar[30 + (userResultVar[i + 20])]++; // Set Winner
-            gameCounter--;
         }
         return;
     }
 
     public int ticTacToe() {
         Random rand = new Random(); // instance of random class
-        Input in = new Input();
-        Display show = new Display();
 
         String dummyA; // For user input
-        int dummyB; // For user input
-        int winner;
-        gameCounter = 9;
+        int dummyB; // For temporary random integer
 
         int[] resultArr = new int[10];
 
-        show.ticTacToe();
+        Display.ticTacToe();
         continuePrompt();
 
         tttPrintResult(resultArr); // Print the game Interface
         tttLoop1: do {
-
             // #region Player
             out.print("\n>>> Enter an available number: ");
-
             // Check input type range
             do {
-                dummyA = in.Read();
-                if (!in.validCheck(3, dummyA)) { // Invalid Input
-                    show.errorMessage(3); // Invalid Input Message
+                dummyA = Input.read();
+                if (!Input.validCheck(3, dummyA)) { // Invalid Input
+                    Display.errorMessage(3); // Invalid Input Message
                     continue tttLoop1;
                 } else {
                     out.println("\n"); // Print new line
@@ -358,43 +329,42 @@ public class Game {
             } while (true);
 
             // Check input value range
-            dummyB = Integer.parseInt(dummyA);
-            if (resultArr[dummyB] == 0) {
-                resultArr[dummyB] = 2;
-                gameCounter--;
+            if (resultArr[Integer.parseInt(dummyA)] == 0) {
+                resultArr[Integer.parseInt(dummyA)] = 2;
                 out.println(">>>   Player's Move");
-                tttPrintResult(resultArr);
+                tttPrintResult(resultArr); // Print the current game UI
                 // Check Winner
-                winner = tttCheckAlgorithm(resultArr);
-                if (winner != 0) {
-                    gameCounter = 0;
-                    return winner;
+                if (tttCheckAlgorithm(resultArr) != 0) { // Check if player won with the move
+                    return tttCheckAlgorithm(resultArr); // Return the winner id
                 }
             } else {
-                show.errorMessage(31); // Show not available message
+                Display.errorMessage(31); // Display not available message
                 continue tttLoop1;
             }
-            if (gameCounter == 0) {
-                return 0;
+
+            // Check game complete
+            for (int i = 0; i < resultArr.length; i++) {
+                if (resultArr[i] == 0) {
+                    break; // Continue the game if there is a number still available
+                } else if ((i == resultArr.length - 1) && (resultArr[i + 1] != 0)) {
+                    return 0; // Return tie
+                }
             }
             // #endregion Player
-            wait(2000);
+            wait(1000);
             // #region Computer
-            int temp = 0;
+
             do {
-                temp = rand.nextInt(9) + 1; // Generate a number for computer
-                if (resultArr[temp] != 0) {
+                dummyB = rand.nextInt(9) + 1; // Generate a number for computer
+                if (resultArr[dummyB] != 0) { // If the number is taken, loop again to get new nubmer
                     continue;
                 } else {
-                    resultArr[temp] = 1;
-                    gameCounter--;
+                    resultArr[dummyB] = 1; // Mark the number as computer's choice
                     out.println(">>>   Computer's Move");
-                    tttPrintResult(resultArr);
+                    tttPrintResult(resultArr); // Print the current game UI
                     // Check winner
-                    winner = tttCheckAlgorithm(resultArr);
-                    if (winner != 0) {
-                        gameCounter = 0;
-                        return winner;
+                    if (tttCheckAlgorithm(resultArr) != 0) { // Check if computer won with the move
+                        return tttCheckAlgorithm(resultArr); // Return winner id
                     }
                     break;
                 }
@@ -407,21 +377,17 @@ public class Game {
 
     public void flipAndMatch() {
         char[] card = { 'a', 'a', 'b', 'b', 'c', 'c', 'd', 'd', 'e', 'e', 'f', 'f',
-                'g', 'g', 'h', 'h', 'i', 'i', 'j', 'j' };
+                'g', 'g', 'h', 'h', 'i', 'i', 'j', 'j' }; // Prepare array of options
 
-        boolean[] resultArr = new boolean[21];
+        boolean[] resultArr = new boolean[21]; // Array to store card flipped status
 
-        Input in = new Input();
-        Display show = new Display();
+        String dummyA; // For storing player input
+        int previousCard = 0; // To store the previous selectrion of the player
+        int gameCounter = 10; // Set the count for the game base on card pair
+        int index; // temporary index variable use for shuffling card array
 
-        String dummyA;
-        int dummyB;
-        int previousCard = 0;
-        gameCounter = 10;
-
-        int index;
         Random rand = new Random();
-        // Shuffle the card array
+        // Card shuffle algorithm
         for (int i = card.length - 1; i > 0; i--) {
             index = rand.nextInt(i + 1);
             if (index != i) {
@@ -431,7 +397,7 @@ public class Game {
             }
         }
 
-        show.flipAndMatch();
+        Display.flipAndMatch(); // Show game UI and Rules
         continuePrompt();
 
         famPrintResult(card, resultArr);
@@ -439,9 +405,10 @@ public class Game {
             out.print("\n>>> Enter an available card number: ");
             // Check input type range
             do {
-                dummyA = in.Read();
-                if (!in.validCheck(4, dummyA)) { // Invalid Input
-                    show.errorMessage(4); // Invalid Input Message
+                dummyA = Input.read();
+                if (!Input.validCheck(4, dummyA)) { // Invalid Input
+                    Display.errorMessage(4); // Invalid Input Message
+                    famPrintResult(card, resultArr); // Print hte result again fore going back to prompt player
                     continue famLoop1;
                 } else {
                     out.println("\n"); // Print new line
@@ -450,37 +417,36 @@ public class Game {
             } while (true);
 
             // Check input value range
-            dummyB = Integer.parseInt(dummyA);
-            if (!resultArr[dummyB]) {
-                resultArr[dummyB] = true;
-                famPrintResult(card, resultArr);
+            if (!resultArr[Integer.parseInt(dummyA)]) { // If the card is not flipped yet
+                resultArr[Integer.parseInt(dummyA)] = true; // Set the card to flipped
+                famPrintResult(card, resultArr); // Print the current game UI
             } else {
-                show.errorMessage(41);
-                famPrintResult(card, resultArr);
+                Display.errorMessage(41); // Print the message telling user the number is taken
+                famPrintResult(card, resultArr); // Print hte result again fore going back to prompt player
                 continue famLoop1;
             }
 
             // Check if matching pair
             if (previousCard == 0) { // 1st card
-                previousCard = dummyB;
-            } else if (card[dummyB - 1] != card[previousCard - 1]) { // 2nd card: If not match with previous card
-                resultArr[dummyB] = false;
-                resultArr[previousCard] = false;
-                previousCard = 0;
+                previousCard = Integer.parseInt(dummyA); // Set previous card to current selection
+            } else if (card[Integer.parseInt(dummyA) - 1] != card[previousCard - 1]) { // 2nd card: If not match with
+                                                                                       // previous card
+                resultArr[Integer.parseInt(dummyA)] = false;// Set current selection to false
+                resultArr[previousCard] = false; // Set previous selection to false
+                previousCard = 0; // Reset the prev selection
                 out.println("\n>>>    Opps, you missed! Try again!\n");
-                wait(3000);
+                wait(2000);
                 famPrintResult(card, resultArr);
-            } else { // 2nd card: and match wit the previous card
-
+            } else { // 2nd card: and match with the previous card
                 previousCard = 0; // Reset previous card and current card
-                gameCounter--; // Reduce matching pair count
+                gameCounter--;
                 out.println("\n>>>    It's a match!\n");
                 wait(1000);
+                if (gameCounter == 0) {
+                    return;
+                }
             }
 
-            if (gameCounter == 0) {
-                return;
-            }
         } while (true);
 
     }
