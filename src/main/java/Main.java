@@ -11,78 +11,64 @@ public class Main {
     public final static boolean DEBUG_FLIP_AND_MATCH = false;
     public final static boolean DEBUG_FIVE_DICE = false;
 
+    // public boolean userWin = false; // To store the condition if the user win
+    // int[] Result = new int[33]; // Initialize Space to store game result
+
     public static void main(String[] args) {
 
-        String userInput; // To store user's input
-        String gameOption; // To store game option
-
         Game run = new Game();
-
-        boolean userWin = false; // To store the condition if the user win
-        int[] Result = new int[33]; // Initialize Space to store game result
-
         Display.mainMenu(); // Print main menu interface
 
         menu: while (true) {
-            // Ask for game option
-            gameOption = Input.read();
-            if (!Input.validCheck(0, gameOption)) { // Invalid Input
+            if (!Input.validCheck(0)) { // Invalid Input
                 Display.errorMessage(0); // Invalid Input Message
                 continue menu; // Loop main menu again
             }
 
-            gameOption = gameOption.toLowerCase(); // Convert to lower case
             if (DEBUG_MAIN) {
-                out.println("The userInput is :" + userInput.charAt(0) + ":"); // Debug
+                out.println("The userInput is :" + Input.getUserInput().charAt(0) + ":"); // Debug
             }
 
             // Run the game
             game: while (true) {
-
-                switch (gameOption.charAt(0)) {
+                switch (Input.getGameOption()) {
                     case 'a':
-                        userWin = run.hangman(Result);
+                        run.execHangman();
                         break;
                     case 'b':
-                        run.scissorRockPaper(Result);
+                        run.execScissorRockPaper();
                         break;
                     case 'c':
-                        Result[0] = run.ticTacToe();
+                        run.execTicTacToe();
                         break;
                     case 'd':
-                        run.flipAndMatch();
+                        // run.flipAndMatch();
                         break;
                     case 'e':
-                        run.fiveDice();
+                        // run.fiveDice(Result);
                         break;
                     default:
                         Display.errorMessage(6); // Invalid or unexpected input from user
                         continue menu;
                 }
 
-                // Print the game result
-                // Print the game over prompt
-                Display.gameOver(gameOption.charAt(0), userWin, Result);
+                // Print the game result and game over
+                Display.gameOver();
                 gameEnd: while (true) {
-                    userInput = Input.read();
-                    if (!Input.validCheck(6, userInput)) { // Invalid Input
+
+                    if (!Input.validCheck(6)) { // Invalid Input
                         Display.errorMessage(7); // Invalid Input Message
                         continue gameEnd; // Loop back to prompt user input
                     } else {
-                        if (userInput.toLowerCase().charAt(0) == 'n') { // If the user choose no
+                        if (Input.getUserInput().toLowerCase().charAt(0) == 'n') { // If the user choose no
                             Display.mainMenu(); // Display the main menu UI
                             continue menu; // Loop back to prompt user input
                         } else { // If user choose yes
                             continue game; // Loop back to game
                         }
                     }
-
                 }
-
             }
-
         }
-
     }
-
 }

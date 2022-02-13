@@ -2,6 +2,17 @@ import java.util.regex.*;
 
 public class Input {
 
+    private static String userInput; // To store user's input
+    private static String gameOption; // To store game option
+
+    static String getUserInput() {
+        return userInput;
+    }
+    
+    static char getGameOption() {
+        return gameOption.charAt(0);
+    }
+
     public static String read() {
         do {
             try {
@@ -13,13 +24,18 @@ public class Input {
         } while (true);
     }
 
-    public static boolean validCheck(int menuType, String userInput) {
+    public static boolean validCheck(int menuType) {
         Pattern regExPat;
         Matcher matchVar;
-        // Check input type range 
+
+        userInput = Input.read(); // Read user input
+
+        // Check input type range
         switch (menuType) {
             case 0: // Main Menu
-                regExPat = Pattern.compile("[abcdeABCDE]{1}");
+                gameOption = userInput;
+                gameOption.toLowerCase(); // Convert to lower case
+                regExPat = Pattern.compile("[abcde]{1}");
                 break;
             case 1: // Hangman
                 regExPat = Pattern.compile("[a-z]");

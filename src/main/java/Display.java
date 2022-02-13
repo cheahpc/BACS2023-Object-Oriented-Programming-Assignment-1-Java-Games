@@ -46,22 +46,24 @@ public class Display {
         }
     }
 
-    public static void gameOver(char gameType, boolean userWin, int userResult[]) {
+    public static void gameOver() {
 
-        switch (gameType) {
+        switch (Input.getGameOption()) {
             case 'a':
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-                if (userWin) { // If the user won
-                    if (userResult[0] == 0) {
+                if (Game.getResultArr(0) == 1) { // If the user won
+                    if (Game.getResultArr(0) == 0) {
                         out.println("+++   Awesome! You didn't even miss a letter!             +++\n");
-                    } else if (userResult[0] == 1) {
+                    } else if (Game.getResultArr(0) == 1) {
                         out.println("+++   Great Job! You missed just once!                    +++\n");
                     } else {
                         out.println(
-                                "+++   Well Done! Too bad you missed " + userResult[0] + " times.              +++\n");
+                                "+++   Well Done! Too bad you missed " + Game.getResultArr(0)
+                                        + " times.              +++\n");
                     }
                 } else { // If the user lose
-                    out.println("+++   Opps, better luck next time!                        +++\n");
+                    out.println("+++   Opps, the word is: " + Game.getHangmanWord());
+                    out.println("+++   Better luck next time!\n");
                 }
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 break;
@@ -70,70 +72,52 @@ public class Display {
                 out.println("+++  Round    Computer      Player       Winner           +++");
                 out.print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 for (int i = 0; i < 10; i++) {
-                    if (i == 9) {
-                        out.print("\n+++    ");
-                    } else {
-                        out.print("\n+++     ");
-                    }
+                    out.print((i == 9) ? ("\n+++    ") : ("\n+++     "));
                     out.print(i + 1);
 
                     for (int j = 0; j < 11; j += 10) {
-                        switch (userResult[i + j]) {
-                            case 0: // Scissor
-                                out.print("     Scissor  ");
-                                break;
-                            case 1: // Rock
-                                out.print("     Rock     ");
-                                break;
-                            case 2: // Paper
-                                out.print("     Paper    ");
-                                break;
-                            default:
-                                break;
+                        if (Game.getResultArr(i + j) == 0) {
+                            out.print("     Scissor  ");
+                        } else if (Game.getResultArr(i + j) == 1) {
+                            out.print("     Rock     ");
+                        } else {
+                            out.print("     Paper    ");
                         }
                     }
 
-                    if (userResult[i + 20] == 0) {
+                    if (Game.getResultArr(i + 20) == 0) {
                         out.print("    Computer");
-                    } else if (userResult[i + 20] == 1) {
+                    } else if (Game.getResultArr(i + 20) == 1) {
                         out.print("    Player");
                     } else {
                         out.print("    Tie");
                     }
                 }
                 out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                if (userResult[30] > 1) { // Check if the computer win more than a game
-                    out.println("+++   The Computer won " + userResult[30] + " games.");
-                } else {
-                    out.println("+++   The Computer won " + userResult[30] + " game.");
-                }
-                if (userResult[31] > 1) { // Check if the player win more than a game
-                    out.println("+++   The Player won " + userResult[31] + " games.");
-                } else {
-                    out.println("+++   The Player won " + userResult[31] + " game.");
-                }
-                if (userResult[32] > 1) { // Check if there is more than a tie
-                    out.println("+++   There are " + userResult[32] + " ties in the game.");
-                } else {
-                    out.println("+++   There is " + userResult[32] + " tie in the game.");
-                }
+                out.println("+++   The Computer won " + Game.getResultArr(30)
+                        + ((Game.getResultArr(30) > 1) ? (" games.") : (" game.")));
+                out.println("+++   The Player won " + Game.getResultArr(31)
+                        + ((Game.getResultArr(31) > 1) ? (" games.") : (" game.")));
+                out.println(((Game.getResultArr(32) > 1) ? ("+++   There are ") : ("+++   There is "))
+                        + Game.getResultArr(32)
+                        + " ties in the game.");
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 break;
             case 'c':
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-                if (userResult[0] == 0) { // If the game is a tie
+                if (Game.getResultArr(0) == 0) { // If the game is a tie
                     out.println("+++   What a great match! It is a tie!                    +++\n");
-                } else if (userResult[0] == 1) { // If the computer won
+                } else if (Game.getResultArr(0) == 1) { // If the computer won
                     out.println("+++   Too bad, the Computer Wins!                         +++\n");
-                } else if (userResult[0] == 2) { // If the player won
+                } else if (Game.getResultArr(0) == 2) { // If the player won
                     out.println("+++   Congratulations! You are smarter than the computer! +++\n");
                 }
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 break;
             case 'd':
-                out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-                out.println("+++   Awesome! You have completed the puzzle!             +++\n");
-                out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                // out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                // out.println("+++ Awesome! You have completed the puzzle! +++\n");
+                // out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 break;
             case 'e':
                 break;
@@ -162,6 +146,7 @@ public class Display {
         out.println(">     E      |  Five Dice");
         out.println(">----------------------------------------");
         out.print(">  Please enter the alphabet of your desired game: ");
+        return;
     }
 
     public static void hangman() {
@@ -197,7 +182,8 @@ public class Display {
         out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
         out.println("+++   1. Select a number (1-9) to place your symbol       +++");
         out.println("+++   2. Form a straight line with 3 matching symbol      +++");
-        out.println("+++   3. Horizontal, Vertical, and diagonal line accepted +++");
+        out.println("+++   3. Horizontal, Vertical, and diagonal lines         +++");
+        out.println("+++      accepted                                         +++");
         out.println("+++   4. Player will be represented by 'X'                +++");
         out.println("+++   4. Computer will be represented by 'O'              +++");
         out.println("+++                                                       +++");
@@ -212,26 +198,56 @@ public class Display {
         return;
     }
 
-    public static void flipAndMatch() {
-        out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        out.println("+++         Welcome to the Flip and Match Game!          ++++");
-        out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-        out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
-        out.println("+++   1. Select a pair of available number                +++");
-        out.println("+++   2. Find all matching pair to complete the game      +++");
-        out.println("+++                                                       +++");
-        out.println("+++                   Numbering Diagram                   +++");
-        out.println("+++                    1 |  2 |  3 |  4                   +++");
-        out.println("+++                  ----|----|----|----                  +++");
-        out.println("+++                    5 |  6 |  7 |  8                   +++");
-        out.println("+++                  ----|----|----|----                  +++");
-        out.println("+++                    9 | 10 | 11 | 12                   +++");
-        out.println("+++                  ----|----|----|----                  +++");
-        out.println("+++                   13 | 14 | 15 | 16                   +++");
-        out.println("+++                  ----|----|----|----                  +++");
-        out.println("+++                   17 | 18 | 19 | 20                   +++");
-        out.println("+++                                                       +++");
-        out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-        return;
-    }
+    /*
+     * public static void flipAndMatch() {
+     * out.println(
+     * "\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+     * out.println("+++         Welcome to the Flip and Match Game!          ++++");
+     * out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+     * );
+     * out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
+     * out.println("+++   1. Select a pair of available number                +++");
+     * out.println("+++   2. Find all matching pair to complete the game      +++");
+     * out.println("+++                                                       +++");
+     * out.println("+++                   Numbering Diagram                   +++");
+     * out.println("+++                    1 |  2 |  3 |  4                   +++");
+     * out.println("+++                  ----|----|----|----                  +++");
+     * out.println("+++                    5 |  6 |  7 |  8                   +++");
+     * out.println("+++                  ----|----|----|----                  +++");
+     * out.println("+++                    9 | 10 | 11 | 12                   +++");
+     * out.println("+++                  ----|----|----|----                  +++");
+     * out.println("+++                   13 | 14 | 15 | 16                   +++");
+     * out.println("+++                  ----|----|----|----                  +++");
+     * out.println("+++                   17 | 18 | 19 | 20                   +++");
+     * out.println("+++                                                       +++");
+     * out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+     * );
+     * }
+     * 
+     * public static void fiveDice() {
+     * out.println(
+     * "\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+     * out.println("+++           Welcome to the Five Dice Game!             ++++");
+     * out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+     * );
+     * out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
+     * out.println("+++   1. 5 of a kind beats 4 of a kind                    +++");
+     * out.println("+++   2. 4 of a kind beats 3 of a kind                    +++");
+     * out.println("+++   3. 3 of a kind beats 2 of a kind                    +++");
+     * out.println("+++   4. 2 of a kind beats normal cards                   +++");
+     * out.println("+++   5. If both player and computer don't have a combo,  +++");
+     * out.println("+++      it will be a tie                                 +++");
+     * out.println("+++   6. If both player and computer get same combo,      +++");
+     * out.println("+++      the one side with larger comboo value wins       +++");
+     * out.println("+++                                                       +++");
+     * out.println("+++   Interface Design                                    +++");
+     * out.println("+++   Computer : O , O , O , O , o                        +++");
+     * out.println("+++   Player   : X , X , X , X , X                        +++");
+     * out.println("+++                                                       +++");
+     * out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+     * );
+     * return;
+     * }
+     */
+
 }
