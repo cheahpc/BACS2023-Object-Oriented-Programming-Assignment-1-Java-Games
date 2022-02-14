@@ -1,18 +1,15 @@
 import static java.lang.System.out;
-import java.util.Scanner;
+
 
 public class Main {
 
-    public static Scanner sc = new Scanner(System.in);
+    
     public final static boolean DEBUG_MAIN = false;
     public final static boolean DEBUG_HANGMAN = false;
     public final static boolean DEBUG_SCISSOR_ROCK_PAPER = false;
     public final static boolean DEBUG_TIC_TAC_TOE = false;
     public final static boolean DEBUG_FLIP_AND_MATCH = false;
     public final static boolean DEBUG_FIVE_DICE = false;
-
-    // public boolean userWin = false; // To store the condition if the user win
-    // int[] Result = new int[33]; // Initialize Space to store game result
 
     public static void main(String[] args) {
 
@@ -55,7 +52,6 @@ public class Main {
                 // Print the game result and game over
                 Display.gameOver();
                 gameEnd: while (true) {
-
                     if (!Input.validCheck(6)) { // Invalid Input
                         Display.errorMessage(7); // Invalid Input Message
                         continue gameEnd; // Loop back to prompt user input

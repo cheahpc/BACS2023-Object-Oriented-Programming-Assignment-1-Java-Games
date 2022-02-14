@@ -21,7 +21,7 @@ public class Game {
     private static void continuePrompt() {
         System.out.println("Press {Enter} key to start the game!"); // Print prompt message
         try {
-            Main.sc.nextLine(); // Read input
+            Input.sc.nextLine(); // Read input
         } catch (Exception e) {
             System.out.println("Error! Unable to process input."); // Unexpected exception message
         }

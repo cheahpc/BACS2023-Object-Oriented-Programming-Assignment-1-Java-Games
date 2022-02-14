@@ -1,14 +1,16 @@
 import java.util.regex.*;
+import java.util.Scanner;
 
 public class Input {
 
     private static String userInput; // To store user's input
     private static String gameOption; // To store game option
+    public static Scanner sc = new Scanner(System.in);
 
     static String getUserInput() {
         return userInput;
     }
-    
+
     static char getGameOption() {
         return gameOption.charAt(0);
     }
@@ -16,7 +18,7 @@ public class Input {
     public static String read() {
         do {
             try {
-                String userInput = Main.sc.nextLine();
+                String userInput = Input.sc.nextLine();
                 return userInput;
             } catch (Exception e) {
                 System.out.println("Error! Unable to process input.");
