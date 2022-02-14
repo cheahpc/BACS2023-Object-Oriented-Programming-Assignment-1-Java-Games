@@ -272,7 +272,7 @@ public class Game {
                     Display.errorMessage(3); // Invalid Input Message
                     continue tttLoop1;
                 } else {
-                    out.println("\n"); // Print new line
+                    out.println("\n"); // Print new linee
                     break;
                 }
             } while (true);

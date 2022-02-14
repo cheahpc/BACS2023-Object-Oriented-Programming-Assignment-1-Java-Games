@@ -114,13 +114,6 @@ public class Display {
                 }
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 break;
-            case 'd':
-                // out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-                // out.println("+++ Awesome! You have completed the puzzle! +++\n");
-                // out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-                break;
-            case 'e':
-                break;
 
             default:
                 break;
@@ -198,56 +191,31 @@ public class Display {
         return;
     }
 
-    /*
-     * public static void flipAndMatch() {
-     * out.println(
-     * "\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-     * out.println("+++         Welcome to the Flip and Match Game!          ++++");
-     * out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
-     * );
-     * out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
-     * out.println("+++   1. Select a pair of available number                +++");
-     * out.println("+++   2. Find all matching pair to complete the game      +++");
-     * out.println("+++                                                       +++");
-     * out.println("+++                   Numbering Diagram                   +++");
-     * out.println("+++                    1 |  2 |  3 |  4                   +++");
-     * out.println("+++                  ----|----|----|----                  +++");
-     * out.println("+++                    5 |  6 |  7 |  8                   +++");
-     * out.println("+++                  ----|----|----|----                  +++");
-     * out.println("+++                    9 | 10 | 11 | 12                   +++");
-     * out.println("+++                  ----|----|----|----                  +++");
-     * out.println("+++                   13 | 14 | 15 | 16                   +++");
-     * out.println("+++                  ----|----|----|----                  +++");
-     * out.println("+++                   17 | 18 | 19 | 20                   +++");
-     * out.println("+++                                                       +++");
-     * out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
-     * );
-     * }
-     * 
-     * public static void fiveDice() {
-     * out.println(
-     * "\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-     * out.println("+++           Welcome to the Five Dice Game!             ++++");
-     * out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
-     * );
-     * out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
-     * out.println("+++   1. 5 of a kind beats 4 of a kind                    +++");
-     * out.println("+++   2. 4 of a kind beats 3 of a kind                    +++");
-     * out.println("+++   3. 3 of a kind beats 2 of a kind                    +++");
-     * out.println("+++   4. 2 of a kind beats normal cards                   +++");
-     * out.println("+++   5. If both player and computer don't have a combo,  +++");
-     * out.println("+++      it will be a tie                                 +++");
-     * out.println("+++   6. If both player and computer get same combo,      +++");
-     * out.println("+++      the one side with larger comboo value wins       +++");
-     * out.println("+++                                                       +++");
-     * out.println("+++   Interface Design                                    +++");
-     * out.println("+++   Computer : O , O , O , O , o                        +++");
-     * out.println("+++   Player   : X , X , X , X , X                        +++");
-     * out.println("+++                                                       +++");
-     * out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
-     * );
-     * return;
-     * }
-     */
+    public static void flipAndMatch() {
+
+        return;
+    }
+
+    public static void fiveDice() {
+        System.out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("+++           Welcome to the Five Dice Game!             ++++");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        System.out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
+        System.out.println("+++   1. 5 of a kind beats 4 of a kind                    +++");
+        System.out.println("+++   2. 4 of a kind beats 3 of a kind                    +++");
+        System.out.println("+++   3. 3 of a kind beats 2 of a kind                    +++");
+        System.out.println("+++   4. 2 of a kind beats normal cards                   +++");
+        System.out.println("+++   5. If both player and computer don't have a combo,  +++");
+        System.out.println("+++      it will be a tie                                 +++");
+        System.out.println("+++   6. If both player and computer get same combo,      +++");
+        System.out.println("+++      the one side with larger comboo value wins       +++");
+        System.out.println("+++                                                       +++");
+        System.out.println("+++   Interface Design                                    +++");
+        System.out.println("+++   Player   :   O   O   O   O   O                      +++");
+        System.out.println("+++   Computer :   X   X   X   X   X                      +++");
+        System.out.println("+++                                                       +++");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        return;
+    }
 
 }

@@ -39,10 +39,10 @@ public class Main {
                         run.execTicTacToe();
                         break;
                     case 'd':
-                        // run.flipAndMatch();
+                        // Ler Shean
                         break;
                     case 'e':
-                        // run.fiveDice(Result);
+                        FiveDice.execute();
                         break;
                     default:
                         Display.errorMessage(6); // Invalid or unexpected input from user
