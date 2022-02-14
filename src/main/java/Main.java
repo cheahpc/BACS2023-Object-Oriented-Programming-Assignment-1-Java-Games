@@ -1,9 +1,7 @@
 import static java.lang.System.out;
 
-
 public class Main {
 
-    
     public final static boolean DEBUG_MAIN = false;
     public final static boolean DEBUG_HANGMAN = false;
     public final static boolean DEBUG_SCISSOR_ROCK_PAPER = false;

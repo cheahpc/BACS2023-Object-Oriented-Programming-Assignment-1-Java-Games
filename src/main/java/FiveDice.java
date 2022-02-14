@@ -80,5 +80,6 @@ public class FiveDice {
 
         // display result
         FDice_Output.result(ROUND, SIZE, player, computer, countPC, countPlayer, result);
+        System.out.println();
     }
 }

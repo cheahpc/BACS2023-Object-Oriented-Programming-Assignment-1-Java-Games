@@ -18,7 +18,7 @@ public class Input {
     public static String read() {
         do {
             try {
-                String userInput = Input.sc.nextLine();
+                userInput = Input.sc.nextLine();
                 return userInput;
             } catch (Exception e) {
                 System.out.println("Error! Unable to process input.");
@@ -48,10 +48,11 @@ public class Input {
             case 3: // Tic-Tac-Toe
                 regExPat = Pattern.compile("[1-9]{1}");
                 break;
-            case 4: // Flip and Match
-                regExPat = Pattern.compile("[0-9]{1,2}");
-                break;
+            // case 4: // Flip and Match
+            // regExPat = Pattern.compile("[0-9]{1,2}");
+            // break;
             // case 5: // Five Dice
+            // break;
             case 6: // Game Continue Option
                 regExPat = Pattern.compile("[yYnN]{1}");
                 break;

@@ -191,10 +191,6 @@ public class Display {
         return;
     }
 
-    public static void flipAndMatch() {
-
-        return;
-    }
 
     public static void fiveDice() {
         System.out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
