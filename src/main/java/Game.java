@@ -4,7 +4,7 @@ import static java.lang.System.out;
 
 public class Game {
     private Random rand = new Random(); // instance of random class
-    private static int[] resultArr = new int[33]; // Initialize Space to store game result
+    private static int gameResult; // Initialize Space to store game result
     private final String[] words = { "secretary", "determine", "baby", "cow", "robot", "tank", "begin", "root", "ride",
             "meaning", "ignorant", "retire", "link", "grimace", "summer", "listen" };
 
@@ -14,8 +14,8 @@ public class Game {
         return hangmanWord;
     }
 
-    static int getResultArr(int index) {
-        return resultArr[index];
+    static int getResult() {
+        return gameResult;
     }
 
     private static void continuePrompt() {
@@ -110,42 +110,13 @@ public class Game {
         }
     }
 
-    private static void srpCheckAlgorithm(int index) {
-        // Check for each possible outcome and set the winner
-        if (resultArr[index] == 0) {
-            if (resultArr[index + 10] == 0) {
-                resultArr[index + 20] = 2; // 00 Set Tie
-            } else if (resultArr[index + 10] == 1) {
-                resultArr[index + 20] = 1; // 01 Set Player Win
-            } else if (resultArr[index + 10] == 2) {
-                resultArr[index + 20] = 0; // 02 Set Computer Win
-            }
-        } else if (resultArr[index] == 1) {
-            if (resultArr[index + 10] == 0) {
-                resultArr[index + 20] = 0; // 10 Set Computer Win
-            } else if (resultArr[index + 10] == 1) {
-                resultArr[index + 20] = 2; // 11 et Tie
-            } else if (resultArr[index + 10] == 2) {
-                resultArr[index + 20] = 1; // 12 Set Player Win
-            }
-        } else if (resultArr[index] == 2) {
-            if (resultArr[index + 10] == 0) {
-                resultArr[index + 20] = 1; // 20 Set Player Win
-            } else if (resultArr[index + 10] == 1) {
-                resultArr[index + 20] = 0; // 21 Set Computer Win
-            } else if (resultArr[index + 10] == 2) {
-                resultArr[index + 20] = 2; // 22 Set Tie
-            }
-        }
-    }
-
     public void execHangman() {
 
         // Predefined words with 10 letters
         hangmanWord = words[(int) (Math.random() * words.length)]; // Set a random word from the list of words
         boolean[] correctGuessArr = new boolean[10]; // Array to keep track of the correct guess
         boolean correctGuess = false; // Boolean to check if the user guessed correctly
-        resultArr[0] = 0; // Reset the array
+        gameResult = 0; // Reset the array
 
         Display.hangman(); // Print hangman UI and rules
         continuePrompt();
@@ -200,59 +171,18 @@ public class Game {
                 if (!correctGuessArr[x]) { // If any false in the array detected
                     break; // Continue the game
                 } else if ((x == hangmanWord.length() - 1) && (correctGuessArr[x])) { // Else if the last guess is true
-                    resultArr[0] = 1;
+                    gameResult = 1;
                     return; // End the exit the method with true
                 }
             }
             if (correctGuess) { // Check if user input is a coorect guess
                 correctGuess = false; // Correct guess reset status
             } else {
-                resultArr[0]++; // Wrong guess increase counter
+                gameResult++; // Wrong guess increase counter
             }
         }
-        resultArr[0] = 0;
+        gameResult = 0;
         return; // Any other case, exit the method with false
-    }
-
-    public void execScissorRockPaper() {
-        // Reset Variables
-        resultArr[30] = 0; // Computer Win Counter
-        resultArr[31] = 0; // Player Win Counter
-        resultArr[32] = 0; // Tie Counter
-
-        Display.scissorRockPaper(); // Show the game UI and Rules
-        continuePrompt(); // Prompt the user to start the game
-
-        // Loop the game for 10 rounds
-        srpLoop1: for (int i = 0; i < 10; i++) {
-            // Computer
-            resultArr[i] = rand.nextInt(3); // Store random computer choice
-
-            // Print player prompt
-            out.print((i == 9) ? ">>>   Round " + (i + 1) + ": " : ">>>   Round  " + (i + 1) + ": ");
-            // Check player's input
-            do {
-                if (!Input.validCheck(2)) { // If input is not in range of regEx
-                    Display.errorMessage(2); // Invalid Input Message
-                    i--; // Decrease chance counter
-                    continue srpLoop1; // Loop back to ask for another input
-                } else { // If input is in range of regEx
-                    break; // Break the loop
-                }
-            } while (true);
-
-            if (Main.DEBUG_SCISSOR_ROCK_PAPER) {
-                for (int x = 0; i < 9; i++) { // Debug show player and computer's option
-                    out.println("Computer: " + resultArr[x] + " Player: " + resultArr[x + 10]);
-                }
-            }
-            resultArr[i + 10] = Integer.parseInt(Input.getUserInput()); // Store the player choice to array
-
-            srpCheckAlgorithm(i);
-
-            resultArr[30 + (resultArr[i + 20])]++; // Set Counter for each outcome
-        }
-        return;
     }
 
     public void execTicTacToe() {
@@ -284,7 +214,7 @@ public class Game {
                 tttPrintResult(tttArr); // Print the current game UI
                 // Check Winner
                 if (tttCheckAlgorithm(tttArr) != 0) { // Check if player won with the move
-                    resultArr[0] = 2;
+                    gameResult = 2;
                     return; // Return the winner id
                 }
             } else {
@@ -297,7 +227,7 @@ public class Game {
                 if (tttArr[i] == 0) {
                     break; // Continue the game if there is a number still available
                 } else if ((i == tttArr.length - 1) && (tttArr[i + 1] != 0)) {
-                    resultArr[0] = 0;
+                    gameResult= 0;
                     return; // Return tie
                 }
             }
@@ -315,7 +245,7 @@ public class Game {
                     tttPrintResult(tttArr); // Print the current game UI
                     // Check winner
                     if (tttCheckAlgorithm(tttArr) != 0) { // Check if computer won with the move
-                        resultArr[0] = 1;
+                        gameResult = 1;
                         return; // Return winner id
                     }
                     break;
@@ -326,5 +256,4 @@ public class Game {
         } while (true);
 
     }
-
 }

@@ -51,14 +51,14 @@ public class Display {
         switch (Input.getGameOption()) {
             case 'a':
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-                if (Game.getResultArr(0) == 1) { // If the user won
-                    if (Game.getResultArr(0) == 0) {
+                if (Game.getResult() == 1) { // If the user won
+                    if (Game.getResult() == 0) {
                         out.println("+++   Awesome! You didn't even miss a letter!             +++\n");
-                    } else if (Game.getResultArr(0) == 1) {
+                    } else if (Game.getResult() == 1) {
                         out.println("+++   Great Job! You missed just once!                    +++\n");
                     } else {
                         out.println(
-                                "+++   Well Done! Too bad you missed " + Game.getResultArr(0)
+                                "+++   Well Done! Too bad you missed " + Game.getResult()
                                         + " times.              +++\n");
                     }
                 } else { // If the user lose
@@ -67,54 +67,17 @@ public class Display {
                 }
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 break;
-            case 'b':
-                out.println("\n+++++++++++++++++++++      Result      ++++++++++++++++++++++");
-                out.println("+++  Round    Computer      Player       Winner           +++");
-                out.print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                for (int i = 0; i < 10; i++) {
-                    out.print((i == 9) ? ("\n+++    ") : ("\n+++     "));
-                    out.print(i + 1);
-
-                    for (int j = 0; j < 11; j += 10) {
-                        if (Game.getResultArr(i + j) == 0) {
-                            out.print("     Scissor  ");
-                        } else if (Game.getResultArr(i + j) == 1) {
-                            out.print("     Rock     ");
-                        } else {
-                            out.print("     Paper    ");
-                        }
-                    }
-
-                    if (Game.getResultArr(i + 20) == 0) {
-                        out.print("    Computer");
-                    } else if (Game.getResultArr(i + 20) == 1) {
-                        out.print("    Player");
-                    } else {
-                        out.print("    Tie");
-                    }
-                }
-                out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                out.println("+++   The Computer won " + Game.getResultArr(30)
-                        + ((Game.getResultArr(30) > 1) ? (" games.") : (" game.")));
-                out.println("+++   The Player won " + Game.getResultArr(31)
-                        + ((Game.getResultArr(31) > 1) ? (" games.") : (" game.")));
-                out.println(((Game.getResultArr(32) > 1) ? ("+++   There are ") : ("+++   There is "))
-                        + Game.getResultArr(32)
-                        + " ties in the game.");
-                out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-                break;
             case 'c':
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-                if (Game.getResultArr(0) == 0) { // If the game is a tie
+                if (Game.getResult() == 0) { // If the game is a tie
                     out.println("+++   What a great match! It is a tie!                    +++\n");
-                } else if (Game.getResultArr(0) == 1) { // If the computer won
+                } else if (Game.getResult() == 1) { // If the computer won
                     out.println("+++   Too bad, the Computer Wins!                         +++\n");
-                } else if (Game.getResultArr(0) == 2) { // If the player won
+                } else if (Game.getResult() == 2) { // If the player won
                     out.println("+++   Congratulations! You are smarter than the computer! +++\n");
                 }
                 out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 break;
-
             default:
                 break;
         }
@@ -188,29 +151,6 @@ public class Display {
         out.println("+++                      8 | 7 | 9                        +++");
         out.println("+++                                                       +++");
         out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-        return;
-    }
-
-
-    public static void fiveDice() {
-        System.out.println("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("+++           Welcome to the Five Dice Game!             ++++");
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-        System.out.println("++++++++++++++++++++++++   Rule   +++++++++++++++++++++++++++");
-        System.out.println("+++   1. 5 of a kind beats 4 of a kind                    +++");
-        System.out.println("+++   2. 4 of a kind beats 3 of a kind                    +++");
-        System.out.println("+++   3. 3 of a kind beats 2 of a kind                    +++");
-        System.out.println("+++   4. 2 of a kind beats normal cards                   +++");
-        System.out.println("+++   5. If both player and computer don't have a combo,  +++");
-        System.out.println("+++      it will be a tie                                 +++");
-        System.out.println("+++   6. If both player and computer get same combo,      +++");
-        System.out.println("+++      the one side with larger comboo value wins       +++");
-        System.out.println("+++                                                       +++");
-        System.out.println("+++   Interface Design                                    +++");
-        System.out.println("+++   Player   :   O   O   O   O   O                      +++");
-        System.out.println("+++   Computer :   X   X   X   X   X                      +++");
-        System.out.println("+++                                                       +++");
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         return;
     }
 

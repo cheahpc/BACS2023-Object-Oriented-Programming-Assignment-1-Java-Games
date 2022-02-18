@@ -31,13 +31,10 @@ public class Main {
                         run.execHangman();
                         break;
                     case 'b':
-                        run.execScissorRockPaper();
-                        break;
+                        Scissor_Rock_Paper.srp_Execute();
+                        continue menu;
                     case 'c':
                         run.execTicTacToe();
-                        break;
-                    case 'd':
-                        // Ler Shean
                         break;
                     case 'e':
                         FiveDice.execute();
